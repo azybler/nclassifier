@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NClassifier", "NClassifier\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NClassifier.Tests", "NClassifier.Tests\NClassifier.Tests.csproj", "{2EE9AB17-C085-43B6-9628-12F851450EE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NClassifierTestProgram", "NClassifierTestProgram\NClassifierTestProgram.csproj", "{ED27892C-3D3B-4ABE-A12A-955432AB73F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{2EE9AB17-C085-43B6-9628-12F851450EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE9AB17-C085-43B6-9628-12F851450EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE9AB17-C085-43B6-9628-12F851450EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED27892C-3D3B-4ABE-A12A-955432AB73F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED27892C-3D3B-4ABE-A12A-955432AB73F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED27892C-3D3B-4ABE-A12A-955432AB73F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED27892C-3D3B-4ABE-A12A-955432AB73F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
