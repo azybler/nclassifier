@@ -57,7 +57,7 @@ Apple is clearly doing a great job here. Kudos. If you want a device that delive
             Console.WriteLine(sentence);
             Console.WriteLine();
          }
-         
+
          Console.ReadLine();
       }
    }

@@ -34,127 +34,127 @@ using System.Text;
 
 namespace NClassifier.Summarizer
 {
-	public class SimpleSummarizer : ISummarizer
-	{
-		private int FindMaxValue(ArrayList input)
-		{
-			input.Sort();
-			return (int)input[0];
-		}
+   public class SimpleSummarizer : ISummarizer
+   {
+      private int FindMaxValue(ArrayList input)
+      {
+         input.Sort();
+         return (int)input[0];
+      }
 
-		private string[] FindWordsWithFrequency(Hashtable wordFrequencies, int frequency)
-		{
-			if (wordFrequencies == null || frequency == 0)
-				return new string[0];
-			else
-			{
-				ArrayList results = new ArrayList();
-				foreach (string word in wordFrequencies.Keys)
-				{
-					if (frequency == (int)wordFrequencies[word])
-						results.Add(word);
-				}
-				return (string[])results.ToArray(typeof(string));
-			}
-		}
+      private string[] FindWordsWithFrequency(Hashtable wordFrequencies, int frequency)
+      {
+         if (wordFrequencies == null || frequency == 0)
+            return new string[0];
+         else
+         {
+            ArrayList results = new ArrayList();
+            foreach (string word in wordFrequencies.Keys)
+            {
+               if (frequency == (int)wordFrequencies[word])
+                  results.Add(word);
+            }
+            return (string[])results.ToArray(typeof(string));
+         }
+      }
 
-		protected ArrayList GetMostFrequentWords(int count, Hashtable wordFrequencies)
-		{
-			ArrayList result = new ArrayList();
-			int freq = 0;
-			foreach (DictionaryEntry entry in wordFrequencies)
-				if ((int)entry.Value > freq)
-					freq = (int)entry.Value;
-			while (result.Count < count && freq > 0)
-			{
-				string[] words = FindWordsWithFrequency(wordFrequencies, freq);
-                foreach (string word in words)
-					result.Add(word);
-				freq--;
-			}
-			return result;
-		}
+      protected ArrayList GetMostFrequentWords(int count, Hashtable wordFrequencies)
+      {
+         ArrayList result = new ArrayList();
+         int freq = 0;
+         foreach (DictionaryEntry entry in wordFrequencies)
+            if ((int)entry.Value > freq)
+               freq = (int)entry.Value;
+         while (result.Count < count && freq > 0)
+         {
+            string[] words = FindWordsWithFrequency(wordFrequencies, freq);
+            foreach (string word in words)
+               result.Add(word);
+            freq--;
+         }
+         return result;
+      }
 
-		public string Summarize(string input, int numberOfSentences)
-		{
-			// get the frequency of each word in the input
-			Hashtable wordFrequencies = Utilities.GetWordFrequency(input);
+      public string Summarize(string input, int numberOfSentences)
+      {
+         // get the frequency of each word in the input
+         Hashtable wordFrequencies = Utilities.GetWordFrequency(input);
 
-			// now create a set of the X most frequent words
-			ArrayList mostFrequentWords = GetMostFrequentWords(100, wordFrequencies);
+         // now create a set of the X most frequent words
+         ArrayList mostFrequentWords = GetMostFrequentWords(100, wordFrequencies);
 
-			// break the input up into sentences
-			string[] workingSentences = Utilities.GetSentences(input.ToLower());
-			string[] actualSentences = Utilities.GetSentences(input);
+         // break the input up into sentences
+         string[] workingSentences = Utilities.GetSentences(input.ToLower());
+         string[] actualSentences = Utilities.GetSentences(input);
 
-			// iterate over the most frequent words, and add the first sentence
-			// that includes each word to the result.
-			ArrayList outputSentences = new ArrayList();
-			foreach (string word in mostFrequentWords)
-			{
+         // iterate over the most frequent words, and add the first sentence
+         // that includes each word to the result.
+         ArrayList outputSentences = new ArrayList();
+         foreach (string word in mostFrequentWords)
+         {
             // iterate over all the sentences
-				for (int i = 0; i < workingSentences.Length; i++)
-				{
+            for (int i = 0; i < workingSentences.Length; i++)
+            {
                // if the sentence contains the word (could use an improvement).
-					if (workingSentences[i].IndexOf(word) >= 0)
-					{
+               if (workingSentences[i].IndexOf(word) >= 0)
+               {
                   // do not add to outputSentences if it is already added.
                   if (outputSentences.Contains(actualSentences[i]))
                      continue;
-						outputSentences.Add(actualSentences[i]);
-						break;
-					}
-					if (outputSentences.Count >= numberOfSentences)
-						break;
-				}
-				if (outputSentences.Count >= numberOfSentences)
-					break;
-			}
+                  outputSentences.Add(actualSentences[i]);
+                  break;
+               }
+               if (outputSentences.Count >= numberOfSentences)
+                  break;
+            }
+            if (outputSentences.Count >= numberOfSentences)
+               break;
+         }
 
-			ArrayList reorderedOutputSentences = ReorderSentences(outputSentences, input);
+         ArrayList reorderedOutputSentences = ReorderSentences(outputSentences, input);
 
-			StringBuilder result = new StringBuilder();
-			foreach (string sentence in reorderedOutputSentences)
-			{
-				if (result.Length > 0)
-					result.Append(" ");
-				result.Append(sentence);
-				result.Append("."); // this isn't correct - it should be whatever symbol the sentence finished with
-			}
+         StringBuilder result = new StringBuilder();
+         foreach (string sentence in reorderedOutputSentences)
+         {
+            if (result.Length > 0)
+               result.Append(" ");
+            result.Append(sentence);
+            result.Append("."); // this isn't correct - it should be whatever symbol the sentence finished with
+         }
 
-			return result.ToString();
-		}
+         return result.ToString();
+      }
 
-		private ArrayList ReorderSentences(ArrayList outputSentences, string input)
-		{
-			ArrayList result = new ArrayList(outputSentences);
-			result.Sort(new SimpleSummarizerComparer(input));
-			return result;
-		}
-	}
+      private ArrayList ReorderSentences(ArrayList outputSentences, string input)
+      {
+         ArrayList result = new ArrayList(outputSentences);
+         result.Sort(new SimpleSummarizerComparer(input));
+         return result;
+      }
+   }
 
-	public class SimpleSummarizerComparer : IComparer
-	{
-		string _input = string.Empty;
+   public class SimpleSummarizerComparer : IComparer
+   {
+      string _input = string.Empty;
 
-		public SimpleSummarizerComparer(string input)
-		{
-			_input = input;
-		}
+      public SimpleSummarizerComparer(string input)
+      {
+         _input = input;
+      }
 
-		#region IComparer Members
-		public int Compare(object x, object y)
-		{
-			string sentence1 = (string)x;
-			string sentence2 = (string)y;
+      #region IComparer Members
+      public int Compare(object x, object y)
+      {
+         string sentence1 = (string)x;
+         string sentence2 = (string)y;
 
-			int indexOfSentence1 = _input.IndexOf(sentence1.Trim());
-			int indexOfSentence2 = _input.IndexOf(sentence2.Trim());
-			int result = indexOfSentence1 - indexOfSentence2;
+         int indexOfSentence1 = _input.IndexOf(sentence1.Trim());
+         int indexOfSentence2 = _input.IndexOf(sentence2.Trim());
+         int result = indexOfSentence1 - indexOfSentence2;
 
-			return result;
-		}
-		#endregion
+         return result;
+      }
+      #endregion
 
-	}
+   }
 }
