@@ -159,6 +159,7 @@
     <Compile Include="Summarizer\ISummarizer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Summarizer\SimonSummarizer.cs" />
     <Compile Include="Summarizer\SimpleSummarizer.cs">
       <SubType>Code</SubType>
     </Compile>
