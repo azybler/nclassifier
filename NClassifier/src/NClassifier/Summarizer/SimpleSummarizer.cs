@@ -92,8 +92,10 @@ namespace NClassifier.Summarizer
 			ArrayList outputSentences = new ArrayList();
 			foreach (string word in mostFrequentWords)
 			{
+            // iterate over all the sentences
 				for (int i = 0; i < workingSentences.Length; i++)
 				{
+               // if the sentence contains the word (could use an improvement).
 					if (workingSentences[i].IndexOf(word) >= 0)
 					{
                   // do not add to outputSentences if it is already added.

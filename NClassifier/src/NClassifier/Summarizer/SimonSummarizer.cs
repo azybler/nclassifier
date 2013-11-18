@@ -81,21 +81,25 @@ namespace NClassifier.Summarizer
          // get the frequency of each word in the input
          Hashtable wordFrequencies = Utilities.GetWordFrequency(input);
 
-         // obtain all possible 2-gram word pairings (this is inefficient)
-         List<string> word2List = new List<string>();
-         foreach (DictionaryEntry wordFrequency1 in wordFrequencies)
-            foreach (DictionaryEntry wordFrequency2 in wordFrequencies)
-               if (wordFrequency1.Key != wordFrequency2.Key)
-                  word2List.Add(wordFrequency1.Key + " " + wordFrequency2.Key);
-
          // break the input up into sentences
          string[] workingSentences = Utilities.GetSentences(input.ToLower());
          string[] actualSentences = Utilities.GetSentences(input);
 
+         // iterate over all the sentences
+         List<string> ngramsList = new List<string>();
+         for (int n = 2; n <= 5; ++n)
+         {
+            for (int i = 0; i < workingSentences.Length; i++)
+            {
+               IEnumerable<string> ngrams = Utilities.makeNgrams(workingSentences[i], n);
+               foreach (string ngram in ngrams)
+                  ngramsList.Add(ngram);
+            }
+         }
+
          // for only those 2-gram word that actually exist in one of the sentences,
          // do a frequency count for the 2-gram word.
-         ITokenizer tokenizer = new DefaultTokenizer();
-         foreach (string word2 in word2List)
+         foreach (string ngrams in ngramsList)
          {
             int frequency = 0;
 
@@ -103,7 +107,7 @@ namespace NClassifier.Summarizer
             for (int i = 0; i < workingSentences.Length; i++)
             {
                int fre = workingSentences[i].Split(
-                  new string[] { word2 },
+                  new string[] { ngrams },
                   StringSplitOptions.RemoveEmptyEntries
                ).Length - 1;
 
@@ -112,8 +116,19 @@ namespace NClassifier.Summarizer
             }
 
             if (frequency > 0)
-               wordFrequencies.Add((string)word2, (int)frequency);
+               if (!wordFrequencies.ContainsKey((string)ngrams))
+                  wordFrequencies.Add((string)ngrams, (int)frequency);
          }
+
+         // round up words with length of 1
+         List<string> wordsToRemove = new List<string>();
+         foreach (DictionaryEntry wordFrequency in wordFrequencies)
+            if (((string)wordFrequency.Key).Length == 1)
+               wordsToRemove.Add((string)wordFrequency.Key);
+
+         // destroy all words of length 1 in wordFrequencies
+         foreach (string wordToRemove in wordsToRemove)
+            wordFrequencies.Remove((string)wordToRemove);
 
          // now create a set of the X most frequent words
          ArrayList mostFrequentWords = GetMostFrequentWords(100, wordFrequencies);
@@ -123,8 +138,10 @@ namespace NClassifier.Summarizer
          ArrayList outputSentences = new ArrayList();
          foreach (string word in mostFrequentWords)
          {
+            // iterate over all the sentences
             for (int i = 0; i < workingSentences.Length; i++)
             {
+               // if the sentence contains the word (could use an improvement).
                if (workingSentences[i].IndexOf(word) >= 0)
                {
                   // do not add to outputSentences if it is already added.

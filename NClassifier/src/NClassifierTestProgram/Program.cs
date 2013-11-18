@@ -39,7 +39,7 @@ Apple is clearly doing a great job here. Kudos. If you want a device that delive
          input = input.Trim();
 
          SimpleSummarizer simpleSummarizer = new SimpleSummarizer();
-         result = simpleSummarizer.Summarize(input, 6);
+         result = simpleSummarizer.Summarize(input, 5);
          sentences = Utilities.GetSentences(result);
          foreach (string sentence in sentences)
          {
@@ -50,7 +50,7 @@ Apple is clearly doing a great job here. Kudos. If you want a device that delive
          Console.WriteLine("=========================");
 
          SimonSummarizer simonSummarizer = new SimonSummarizer();
-         result = simonSummarizer.Summarize(input, 6);
+         result = simonSummarizer.Summarize(input, 5);
          sentences = Utilities.GetSentences(result);
          foreach (string sentence in sentences)
          {
