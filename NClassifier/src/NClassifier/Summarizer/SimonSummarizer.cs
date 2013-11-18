@@ -127,6 +127,9 @@ namespace NClassifier.Summarizer
             {
                if (workingSentences[i].IndexOf(word) >= 0)
                {
+                  // do not add to outputSentences if it is already added.
+                  if (outputSentences.Contains(actualSentences[i]))
+                     continue;
                   outputSentences.Add(actualSentences[i]);
                   break;
                }
