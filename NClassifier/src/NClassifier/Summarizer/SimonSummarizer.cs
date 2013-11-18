@@ -133,9 +133,40 @@ namespace NClassifier.Summarizer
          // now create a set of the X most frequent words
          ArrayList mostFrequentWords = GetMostFrequentWords(100, wordFrequencies);
 
+         ArrayList outputSentences = new ArrayList();
+
+         /*foreach (string word in mostFrequentWords)
+         {
+            int maxFrequency = 0;
+            string maxFrequency_sentence = string.Empty;
+
+            // iterate over all the sentences
+            for (int i = 0; i < workingSentences.Length; i++)
+            {
+               if (outputSentences.Contains((string)actualSentences[i]))
+                  continue;
+
+               int fre = workingSentences[i].Split(
+                  new string[] { word },
+                  StringSplitOptions.RemoveEmptyEntries
+               ).Length - 1;
+
+               if (fre > maxFrequency)
+               {
+                  maxFrequency = fre;
+                  maxFrequency_sentence = actualSentences[i];
+               }
+            }
+
+            if (maxFrequency != 0)
+               outputSentences.Add((string)maxFrequency_sentence);
+
+            if (outputSentences.Count == numberOfSentences)
+               break;
+         }*/
+         
          // iterate over the most frequent words, and add the first sentence
          // that includes each word to the result.
-         ArrayList outputSentences = new ArrayList();
          foreach (string word in mostFrequentWords)
          {
             // iterate over all the sentences

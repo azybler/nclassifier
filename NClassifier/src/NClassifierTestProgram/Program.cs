@@ -23,9 +23,9 @@ So WiFi web browsing battery life, arguably the most common user activity there 
 Nearly 7 whole hours of WiFi web browsing for a real computer in tablet form factor … that's not bad, right? Let's see how the 2013 MacBook Air does, which spec-wise is about as close as we can get to the Surface Pro 2. The screen is somewhat lower resolution and not touch capable, of course, but under the hood, the i5-4200u CPU and LPDDR3 RAM are nearly the same. It's a real computer, too, using the latest Intel technology.
 The Surface Pro 2 has a 42 Wh battery, which puts it closer to the 11 inch Air in capacity. Still, over 11 hours of battery life browsing the web on WiFi? That means the Air is somehow producing nearly two times the battery efficiency of the best hardware and software combination Microsoft can muster, for what I consider to be the most common usage pattern on a computer today. That's shocking. Scandalous, even.
 UPDATE: Turns out the Surface 2 Pro was shipped with bad firmware. Once updated, the WiFi adapter enters lower idle power states and this helps a lot, going from 6.6 hours of browsing time to 8.3 hours, a 25% improvement! That puts it much more in line with the rest of the field, at least, even if it doesn't achieve Mac like runtime.
-It's not exactly news that Windows historically doesn't do as well as OS X on battery life. Way back in 2009, AnandTech tested a MacBook Pro with multiple operating systems:
-2009 15-inch MacBook Pro (73WHr battery)	OS X 10.5.7	Windows Vista x64 SP1	Windows 7 RC1
-Wireless Web Browsing (No Flash) Battery Life	8.13 hours	6.02 hours	5.48 hours
+It's not exactly news that Windows historically doesn't do as well as OS X on battery life. Way back in 2009, AnandTech tested a MacBook Pro with multiple operating systems.
+2009 15-inch MacBook Pro (73WHr battery)	OS X 10.5.7	Windows Vista x64 SP1	Windows 7 RC1.
+Wireless Web Browsing (No Flash) Battery Life	8.13 hours	6.02 hours	5.48 hours.
 That's fine, I knew about this discrepancy, but here's what really bothers me:
 The Windows light usage battery life situation has not improved at all since 2009. If anything the disparity between OS X and Windows light usage battery life has gotten worse.
 Microsoft positions Windows 8 as an operating system that's great for tablets, which are designed for casual web browsing and light app use – but how can that possibly be true when Windows idle power management is so much worse than the competition's desktop operating system in OS X – much less their tablet and phone operating system, iOS?
