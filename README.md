@@ -6,11 +6,15 @@
 
 ## **Changelog**
 
-List of changes that will, or have been made:
+List of changes that have been made:
 
 * Implement smarter summarization that inspect 2-gram word frequency in SimonSummarizer.
 * Generalized SimonSummarizer to inspect n-gram word frequency.
 * Fixed an issue where the output of the summarizer sometimes include duplicated sentences.
+
+List of planned changes (subject to change):
+
+* Include a synonym detector.
 
 ## License
 
