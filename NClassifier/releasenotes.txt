@@ -1,0 +1,5 @@
+0.1.0.0
+=======
+- Synchronized with Classifier4J 0.51 as much as there was time for.
+- JDBC interfaces removed and replaced with ADO.NET interfaces.
+- JDBC data provider implementation removed and replaced with ODBC implementation.
